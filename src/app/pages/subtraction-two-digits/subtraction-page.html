@@ -1,0 +1,26 @@
+<div class="page">
+  <h2>Resta de dos números de dos cifras</h2>
+  <div class="expression">
+    <span class="num">{{ a() }}</span>
+    <span class="op"> - </span>
+    <span class="num">{{ b() }}</span>
+    <span class="op"> = </span>
+    <span class="result">
+      @for (d of userDigits(); track $index) {
+        <span class="box">{{ d ?? '\u00A0' }}</span>
+      }
+    </span>
+  </div>
+
+  <div class="keypad">
+    <app-numeric-keyboard (press)="press($event)"></app-numeric-keyboard>
+    <button class="action" (click)="backspace()">Borrar</button>
+    <button class="action" [disabled]="!isFilled()" (click)="check()">Comprobar</button>
+  </div>
+
+  <div class="controls">
+    <button (click)="reset()">Nuevo problema</button>
+  </div>
+
+  <div class="message" role="status" aria-live="polite">{{ message() }}</div>
+</div>
