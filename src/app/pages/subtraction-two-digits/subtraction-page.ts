@@ -80,4 +80,12 @@ export class SubtractionPage {
       this.message.set(`Incorrecto — resultado: ${expected}`);
     }
   }
+
+  protected getDigits(num: number): string[] {
+    return String(num).split('');
+  }
+
+  protected getMaxDigits(): number {
+    return Math.max(String(this.a()).length, String(this.b()).length);
+  }
 }
