@@ -1,9 +1,17 @@
-import { Component, ChangeDetectionStrategy, signal, computed } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  signal,
+  computed,
+  effect,
+  untracked,
+} from '@angular/core';
 import { NumericKeyboard } from '../../components/numeric-keyboard/numeric-keyboard';
+import { form, FormField } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-subtraction-page',
-  imports: [NumericKeyboard],
+  imports: [NumericKeyboard, FormField],
   templateUrl: './subtraction.html',
   styleUrls: ['./subtraction.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -11,9 +19,15 @@ import { NumericKeyboard } from '../../components/numeric-keyboard/numeric-keybo
 export class SubtractionPage {
   private aSignal = signal(0);
   private bSignal = signal(0);
-  private numberOfDigits = signal(2);
+  private numberOfDigits = signal('2');
   protected readonly a = this.aSignal;
   protected readonly b = this.bSignal;
+  protected readonly numberOfDigitsOptions = signal([
+    { value: 1, label: '1 cifra' },
+    { value: 2, label: '2 cifras' },
+    { value: 3, label: '3 cifras' },
+  ]);
+  protected readonly digitsForm = form(this.numberOfDigits);
 
   private resultDigitsSignal = signal<string[]>([]);
   protected readonly resultDigits = this.resultDigitsSignal;
@@ -26,19 +40,25 @@ export class SubtractionPage {
   protected readonly isFilled = computed(() => this.userDigits().every((d) => d !== null));
 
   constructor() {
-    this.reset();
+    effect(() => {
+      const value = this.digitsForm().value();
+      untracked(() => this.generateOperation(Number(value)));
+    });
   }
 
-  private generateNumber(): number {
-    const digits = this.numberOfDigits();
-    const min = Math.pow(10, digits - 1);
-    const max = Math.pow(10, digits) - 1;
+  private generateNumber(numberOfDigits: number): number {
+    const min = Math.pow(10, numberOfDigits - 1);
+    const max = Math.pow(10, numberOfDigits) - 1;
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
   protected reset(): void {
-    let x = this.generateNumber();
-    let y = this.generateNumber();
+    this.generateOperation(Number(this.digitsForm().value()));
+  }
+
+  protected generateOperation(numberOfDigits: number): void {
+    let x = this.generateNumber(numberOfDigits);
+    let y = this.generateNumber(numberOfDigits);
     if (y > x) [x, y] = [y, x];
     this.aSignal.set(x);
     this.bSignal.set(y);
