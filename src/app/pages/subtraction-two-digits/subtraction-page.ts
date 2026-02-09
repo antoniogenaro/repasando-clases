@@ -11,6 +11,7 @@ import { NumericKeyboard } from '../../components/numeric-keyboard/numeric-keybo
 export class SubtractionPage {
   private aSignal = signal(0);
   private bSignal = signal(0);
+  private numberOfDigits = signal(2);
   protected readonly a = this.aSignal;
   protected readonly b = this.bSignal;
 
@@ -28,13 +29,16 @@ export class SubtractionPage {
     this.reset();
   }
 
-  private generateTwoDigit(): number {
-    return Math.floor(Math.random() * 90) + 10; // 10..99
+  private generateNumber(): number {
+    const digits = this.numberOfDigits();
+    const min = Math.pow(10, digits - 1);
+    const max = Math.pow(10, digits) - 1;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
   protected reset(): void {
-    let x = this.generateTwoDigit();
-    let y = this.generateTwoDigit();
+    let x = this.generateNumber();
+    let y = this.generateNumber();
     if (y > x) [x, y] = [y, x];
     this.aSignal.set(x);
     this.bSignal.set(y);
