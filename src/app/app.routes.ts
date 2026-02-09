@@ -3,12 +3,11 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'resta-dos-cifras',
+    redirectTo: 'resta',
     pathMatch: 'full',
   },
   {
-    path: 'resta-dos-cifras',
-    loadComponent: () =>
-      import('./pages/subtraction-two-digits/subtraction-page').then((m) => m.SubtractionPage),
+    path: 'resta',
+    loadComponent: () => import('./pages/subtraction/subtraction').then((m) => m.SubtractionPage),
   },
 ];

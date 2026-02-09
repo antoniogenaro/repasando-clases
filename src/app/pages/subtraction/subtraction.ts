@@ -4,8 +4,8 @@ import { NumericKeyboard } from '../../components/numeric-keyboard/numeric-keybo
 @Component({
   selector: 'app-subtraction-page',
   imports: [NumericKeyboard],
-  templateUrl: './subtraction-page.html',
-  styleUrls: ['./subtraction-page.css'],
+  templateUrl: './subtraction.html',
+  styleUrls: ['./subtraction.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SubtractionPage {
