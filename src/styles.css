@@ -1,6 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import url('https://fonts.googleapis.com/css2?family=Margarine&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Nova+Mono&display=swap');
 @import "tailwindcss";
+
+@theme {
+  --font-sans: "Margarine", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-serif: "Noto Serif", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: "Nova Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
 
 html, body {
   margin: 0;
