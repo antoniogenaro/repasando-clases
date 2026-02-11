@@ -8,10 +8,11 @@ import {
 } from '@angular/core';
 import { NumericKeyboard } from '../../components/numeric-keyboard/numeric-keyboard';
 import { form, FormField } from '@angular/forms/signals';
+import { Button } from '../../components/button/button';
 
 @Component({
   selector: 'app-subtraction-page',
-  imports: [NumericKeyboard, FormField],
+  imports: [NumericKeyboard, FormField, Button],
   templateUrl: './subtraction.html',
   styleUrls: ['./subtraction.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

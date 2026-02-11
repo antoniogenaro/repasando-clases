@@ -1,0 +1,8 @@
+<div
+  class="button w-full flex-1 p-4 text-xl text-white cursor-pointer"
+  [class.button-blue]="color() === 'blue'"
+  [class.button-green]="color() === 'green'"
+  [class.button-amber]="color() === 'amber'"
+>
+  <ng-content></ng-content>
+</div>

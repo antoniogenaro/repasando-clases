@@ -1,0 +1,20 @@
+@reference 'tailwindcss';
+
+@layer components {
+  :host {
+    @apply disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed;
+
+    .button {
+      @apply p-4 text-xl text-white ;
+      &.button-amber {
+        @apply bg-amber-500 hover:bg-amber-600 text-white;
+      }
+      &.button-blue {
+        @apply bg-blue-500 hover:bg-blue-600 text-white;
+      }
+      &.button-green {
+        @apply bg-green-500 hover:bg-green-600 text-white;
+      }
+    }
+  }
+}

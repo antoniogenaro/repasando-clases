@@ -51,29 +51,15 @@
       </div>
 
       <div class="mt-4">
-        <button
-          (click)="reset()"
-          class="p-4 text-xl w-full bg-blue-500 text-white hover:bg-blue-600 cursor-pointer"
-        >
-          Nuevo problema
-        </button>
+        <button appButton color="blue" (click)="reset()" class="w-full">Nuevo problema</button>
       </div>
     </div>
 
     <div class="flex flex-col landscape:w-1/2 portrait:h-1/2 landscape:min-h-full">
       <app-numeric-keyboard class="flex-1" (press)="press($event)"></app-numeric-keyboard>
       <div class="flex">
-        <button
-          (click)="backspace()"
-          class="flex-1 p-4 text-xl bg-amber-500 text-white hover:bg-amber-600 cursor-pointer"
-        >
-          Borrar
-        </button>
-        <button
-          [disabled]="!isFilled()"
-          (click)="check()"
-          class="flex-1 p-4 text-xl bg-green-500 text-white hover:bg-green-600 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
-        >
+        <button appButton color="amber" (click)="backspace()" class="flex-1">Borrar</button>
+        <button appButton color="green" [disabled]="!isFilled()" (click)="check()" class="flex-1">
           Comprobar
         </button>
       </div>
