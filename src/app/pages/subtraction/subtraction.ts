@@ -35,6 +35,9 @@ export class SubtractionPage {
   private userDigitsSignal = signal<(string | null)[]>([]);
   protected readonly userDigits = this.userDigitsSignal;
 
+  private selectedIndexSignal = signal<number>(0);
+  protected readonly selectedIndex = this.selectedIndexSignal;
+
   protected readonly message = signal('');
 
   protected readonly isFilled = computed(() => this.userDigits().every((d) => d !== null));
@@ -66,11 +69,30 @@ export class SubtractionPage {
     const digits = res.split('');
     this.resultDigitsSignal.set(digits);
     this.userDigitsSignal.set(Array(digits.length).fill(null));
+    this.selectedIndexSignal.set(digits.length - 1);
     this.message.set('');
   }
 
   protected press(n: string): void {
     const user = [...this.userDigits()];
+    const sel = this.selectedIndex();
+    if (sel !== null && sel >= 0 && sel < user.length) {
+      user[sel] = n;
+      this.userDigitsSignal.set(user);
+      // move selection to the next empty slot to the left, if any
+      let newSel: number | undefined;
+      for (let i = sel - 1; i >= 0; i--) {
+        if (user[i] === null) {
+          newSel = i;
+          break;
+        }
+      }
+      if (newSel !== undefined) {
+        this.selectedIndexSignal.set(newSel);
+      }
+      return;
+    }
+
     for (let i = user.length - 1; i >= 0; i--) {
       if (user[i] === null) {
         user[i] = n;
@@ -82,6 +104,15 @@ export class SubtractionPage {
 
   protected backspace(): void {
     const user = [...this.userDigits()];
+    const sel = this.selectedIndex();
+    if (sel !== null && sel >= 0 && sel < user.length) {
+      if (user[sel] !== null) {
+        user[sel] = null;
+        this.userDigitsSignal.set(user);
+      }
+      return;
+    }
+
     for (let i = user.length - 1; i >= 0; i--) {
       if (user[i] !== null) {
         user[i] = null;
@@ -90,6 +121,10 @@ export class SubtractionPage {
         return;
       }
     }
+  }
+
+  protected selectDigit(index: number): void {
+    this.selectedIndexSignal.set(index);
   }
 
   protected check(): void {

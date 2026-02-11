@@ -32,11 +32,18 @@
           <div class="border-t-2 border-neutral-700 mt-1 w-fit min-w-20"></div>
 
           <!-- response -->
-          <div class="font-mono flex">
+          <div class="font-mono flex" role="group" aria-label="Respuesta">
             @for (d of userDigits(); track $index) {
-              <span class="w-7 h-9.5 border border-neutral-700 text-xl bg-white text-center">{{
-                d ?? '\u00A0'
-              }}</span>
+              <button
+                type="button"
+                class="digit-btn w-7 h-9.5 text-xl text-center"
+                (click)="selectDigit($index)"
+                [attr.aria-pressed]="selectedIndex() === $index"
+                [class.selected]="selectedIndex() === $index"
+                aria-label="Dígito {{ $index + 1 }}"
+              >
+                {{ d ?? '\u00A0' }}
+              </button>
             }
           </div>
         </div>

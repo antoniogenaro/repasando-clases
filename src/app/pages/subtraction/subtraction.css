@@ -1,0 +1,14 @@
+@reference 'tailwindcss';
+
+@layer components {
+  .digit-btn {
+    @apply px-0 bg-white border border-neutral-700;
+    &:focus {
+      @apply outline-2 outline-blue-600 outline-offset-2;
+    }
+    &.selected {
+      @apply bg-blue-50 border-blue-600;
+    }
+  }
+}
+
