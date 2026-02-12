@@ -57,7 +57,15 @@
       </div>
 
       <div>
-        <button appButton color="blue" (click)="reset()" class="w-full">Nuevo problema</button>
+        <button
+          appButton
+          color="blue"
+          (click)="reset()"
+          class="w-full"
+          [disabled]="isCorrect() === null"
+        >
+          Nuevo problema
+        </button>
       </div>
     </div>
 
