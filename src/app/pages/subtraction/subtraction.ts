@@ -39,7 +39,11 @@ export class SubtractionPage {
   private selectedIndexSignal = signal<number>(0);
   protected readonly selectedIndex = this.selectedIndexSignal;
 
-  protected readonly message = signal('');
+  protected readonly isCorrect = signal<boolean | null>(null);
+
+  protected readonly message = computed(() => 
+    this.isCorrect() === true ? 'Correcto' : this.isCorrect() === false ? 'Incorrecto' : ''
+  );
 
   protected readonly isFilled = computed(() => this.userDigits().every((d) => d !== null));
 
@@ -71,7 +75,7 @@ export class SubtractionPage {
     this.resultDigitsSignal.set(digits);
     this.userDigitsSignal.set(Array(digits.length).fill(null));
     this.selectedIndexSignal.set(digits.length - 1);
-    this.message.set('');
+    this.isCorrect.set(null);
   }
 
   protected press(n: string): void {
@@ -118,7 +122,7 @@ export class SubtractionPage {
       if (user[i] !== null) {
         user[i] = null;
         this.userDigitsSignal.set(user);
-        this.message.set('');
+        this.isCorrect.set(null);
         return;
       }
     }
@@ -134,11 +138,7 @@ export class SubtractionPage {
       .map((d) => d ?? '')
       .join('');
     const expected = this.resultDigits().join('');
-    if (entered === expected) {
-      this.message.set('Correcto ✅');
-    } else {
-      this.message.set(`Incorrecto — resultado: ${expected}`);
-    }
+    this.isCorrect.set(entered === expected);
   }
 
   protected getDigits(num: number): string[] {
