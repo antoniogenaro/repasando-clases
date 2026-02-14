@@ -12,10 +12,11 @@ import { Button } from '../../components/button/button';
 import { OperationStatus } from '../../components/operation-status/operation-status';
 import { VerticalOperation } from '../../components/vertical-operation/vertical-operation';
 import { DigitsInput } from '../../components/digits-input/digits-input';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-addition-page',
-  imports: [NumericKeyboard, FormField, Button, OperationStatus, VerticalOperation, DigitsInput],
+  imports: [NumericKeyboard, FormField, Button, OperationStatus, VerticalOperation, DigitsInput, RouterLink],
   templateUrl: './addition.html',
   styleUrls: ['./addition.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
