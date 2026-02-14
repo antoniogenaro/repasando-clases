@@ -10,4 +10,8 @@ export const routes: Routes = [
     path: 'resta',
     loadComponent: () => import('./pages/subtraction/subtraction').then((m) => m.SubtractionPage),
   },
+  {
+    path: 'suma',
+    loadComponent: () => import('./pages/addition/addition').then((m) => m.AdditionPage),
+  },
 ];
