@@ -10,53 +10,20 @@
         </select>
       </div>
       <div class="flex flex-1 justify-center items-center">
-        <div class="flex-col items-end gap-0.5 flex text-3xl font-medium font-mono">
-          <!-- first number -->
-          <div class="flex gap-1">
-            @for (digit of getDigits(a()); track $index) {
-              <span class="inline-block w-8 text-center">{{ digit }}</span>
-            }
-          </div>
-
-          <!-- "-" & second number -->
-          <div class="flex gap-1 items-center border-b-2 border-black">
-            <span>-</span>
-            <div class="flex gap-1">
-              @for (digit of getDigits(b()); track $index) {
-                <span class="inline-block w-8 text-center">{{ digit }}</span>
-              }
-            </div>
-          </div>
-
-          <!-- response -->
-          <div class="mt-1 flex gap-1" role="group" aria-label="Respuesta">
-            @for (d of userDigits(); track $index) {
-              <button
-                type="button"
-                class="digit-btn w-8 h-9.5 text-3xl text-center font-medium"
-                (click)="selectDigit($index)"
-                [attr.aria-pressed]="selectedIndex() === $index"
-                [class.selected]="selectedIndex() === $index"
-                aria-label="Dígito {{ $index + 1 }}"
-              >
-                {{ d ?? '\u00A0' }}
-              </button>
-            }
-          </div>
-        </div>
+        <app-vertical-operation [a]="a()" [b]="b()" operator="-">
+          <app-digits-input
+            [digits]="userDigits()"
+            [selectedIndex]="selectedIndex()"
+            (select)="selectDigit($event)"
+          />
+        </app-vertical-operation>
       </div>
 
-      @for (_ of [animationKey()]; track _) {
-        <div
-          role="status"
-          aria-live="polite"
-          class="m-2 font-mono h-10 rounded text-center text-xl font-medium flex items-center justify-center"
-          [class.message-correct]="isCorrect()"
-          [class.message-incorrect]="isCorrect() === false"
-        >
-          {{ message() }}
-        </div>
-      }
+      <app-operation-status
+        [status]="isCorrect()"
+        [message]="message()"
+        [animationKey]="animationKey()"
+      />
 
       <div>
         <button

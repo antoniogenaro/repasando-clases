@@ -10,9 +10,13 @@ import { NumericKeyboard } from '../../components/numeric-keyboard/numeric-keybo
 import { form, FormField } from '@angular/forms/signals';
 import { Button } from '../../components/button/button';
 
+import { OperationStatus } from '../../components/operation-status/operation-status';
+import { VerticalOperation } from '../../components/vertical-operation/vertical-operation';
+import { DigitsInput } from '../../components/digits-input/digits-input';
+
 @Component({
   selector: 'app-subtraction-page',
-  imports: [NumericKeyboard, FormField, Button],
+  imports: [NumericKeyboard, FormField, Button, OperationStatus, VerticalOperation, DigitsInput],
   templateUrl: './subtraction.html',
   styleUrls: ['./subtraction.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,0 +1,13 @@
+<div class="flex-col items-end gap-0.5 flex text-3xl font-medium font-mono">
+  <!-- first number -->
+  <app-digits-display [digits]="getDigits(a())" />
+
+  <!-- operator & second number -->
+  <div class="flex gap-1 items-center border-b-2 border-black">
+    <span>{{ operator() }}</span>
+    <app-digits-display [digits]="getDigits(b())" />
+  </div>
+
+  <!-- space for input (handled by parent to keep this component focused on layout) -->
+  <ng-content />
+</div>

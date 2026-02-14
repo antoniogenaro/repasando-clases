@@ -1,0 +1,14 @@
+<div class="mt-1 flex gap-1" role="group" aria-label="Respuesta">
+  @for (d of digits(); track $index) {
+    <button
+      type="button"
+      class="digit-btn w-8 h-9.5 text-3xl text-center font-medium"
+      (click)="onSelect($index)"
+      [attr.aria-pressed]="selectedIndex() === $index"
+      [class.selected]="selectedIndex() === $index"
+      aria-label="Dígito {{ $index + 1 }}"
+    >
+      {{ d ?? '\u00A0' }}
+    </button>
+  }
+</div>

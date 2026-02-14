@@ -1,0 +1,11 @@
+@for (_ of [animationKey()]; track _) {
+  <div
+    role="status"
+    aria-live="polite"
+    class="m-2 font-mono h-10 rounded text-center text-xl font-medium flex items-center justify-center"
+    [class.message-correct]="status() === true"
+    [class.message-incorrect]="status() === false"
+  >
+    {{ message() }}
+  </div>
+}
