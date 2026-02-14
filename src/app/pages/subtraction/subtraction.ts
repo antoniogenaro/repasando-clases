@@ -40,9 +40,10 @@ export class SubtractionPage {
   protected readonly selectedIndex = this.selectedIndexSignal;
 
   protected readonly isCorrect = signal<boolean | null>(null);
+  protected readonly animationKey = signal(0);
 
-  protected readonly message = computed(() => 
-    this.isCorrect() === true ? 'Correcto' : this.isCorrect() === false ? 'Incorrecto' : ''
+  protected readonly message = computed(() =>
+    this.isCorrect() === true ? 'Correcto' : this.isCorrect() === false ? 'Incorrecto' : '',
   );
 
   protected readonly isFilled = computed(() => this.userDigits().every((d) => d !== null));
@@ -139,6 +140,7 @@ export class SubtractionPage {
       .join('');
     const expected = this.resultDigits().join('');
     this.isCorrect.set(entered === expected);
+    this.animationKey.update((k) => k + 1);
   }
 
   protected getDigits(num: number): string[] {
